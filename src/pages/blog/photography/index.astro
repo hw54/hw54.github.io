@@ -1,0 +1,33 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import PostCard from '../../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (
+  await getCollection('photography', ({ data }) => (import.meta.env.PROD ? !data.draft : true))
+).sort((a, b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate));
+---
+
+<Layout
+  title="摄影日记"
+  description="关于街巷、光线与城市日常的摄影记录。"
+>
+  <header class="blog-head">
+    <h1 class="page__title">摄影日记</h1>
+    <p class="blog-head__sub">
+      街巷、光线，以及日常生活里的片段。
+    </p>
+  </header>
+
+  {
+    posts.length === 0 ? (
+      <p class="empty">第一篇摄影日记即将到来。</p>
+    ) : (
+      <ul class="post-list">
+        {posts.map((post) => (
+          <PostCard post={post} base="/blog/photography" />
+        ))}
+      </ul>
+    )
+  }
+</Layout>

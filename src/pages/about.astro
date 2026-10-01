@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../config';
+---
+
+<Layout title="关于" description={`关于 ${site.name} 的个人摄影网站。`}>
+  <article class="page prose">
+    <h1 class="page__title">关于</h1>
+    <p class="lede">这里是 {site.name} 的个人摄影网站。</p>
+    <p>用照片记录街巷、建筑和日常生活，也用文字整理画面里的片段。</p>
+    <p>作品收录在<a href="/">摄影作品</a>，完整的组照与文字记录放在<a href="/blog/photography">摄影日记</a>。</p>
+  </article>
+</Layout>
